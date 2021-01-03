@@ -3,6 +3,7 @@ const path = require('path')
 
 module.exports = {
   webpack: (config, env) => {
+    config.target = 'electron-renderer'
     config.plugins = config.plugins.filter((plugin) => {
       const name = plugin.constructor.name.toString()
       return !['ForkTsCheckerWebpackPlugin', 'ESLintWebpackPlugin'].includes(
@@ -12,7 +13,7 @@ module.exports = {
     return override(
       addWebpackResolve({
         alias: {
-          '@': path.resolve(__dirname, './src'),
+          '#': path.resolve(__dirname, './src'),
         },
       })
     )(config, env)
