@@ -32,7 +32,7 @@ function handleIPC() {
           <!DOCTYPE html>
             <html>
             <body>
-            <script>setTimeout(window.close(), 500);</script>;
+            <script>setTimeout(window.close(), 500);</script>
             </body>
             </html>
           `);
