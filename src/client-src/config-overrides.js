@@ -2,10 +2,12 @@ const { override, disableEsLint } = require('customize-cra')
 
 module.exports = {
   webpack: (config, env) => {
-    const tscheckPlugin = config.plugins.length - 1
-    if ('tsconfig' in config.plugins[tscheckPlugin]) {
-      config.plugins.splice(tscheckPlugin, 1)
-    }
+    config.plugins = config.plugins.filter((plugin) => {
+      const name = plugin.constructor.name.toString()
+      return !['ForkTsCheckerWebpackPlugin', 'ESLintWebpackPlugin'].includes(
+        name
+      )
+    })
     return override(disableEsLint())(config, env)
   },
 }
