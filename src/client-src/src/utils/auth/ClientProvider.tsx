@@ -1,8 +1,8 @@
-import React, { FC, PropsWithChildren, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useState } from 'react';
 import ApolloClient from 'apollo-boost';
 import { ipcRenderer } from 'electron';
-import { ApolloProvider } from '@apollo/react-hooks';
+import { ApolloProvider } from 'react-apollo-hooks';
 
 const GITHUB_BASE_URL = 'https://api.github.com/graphql';
 
@@ -29,5 +29,5 @@ export const ClientProvider: React.FC = ({ children }) => {
       });
     },
   });
-  return <div>{children}</div>;
+  return <ApolloProvider client={client}>{children}</ApolloProvider>;
 };
