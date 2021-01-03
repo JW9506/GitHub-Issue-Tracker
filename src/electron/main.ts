@@ -60,6 +60,7 @@ function handleIPC() {
               AssertType(data, {
                 access_token: 'string',
               });
+              console.log('User access token: \n' + data.access_token);
               resolve(data.access_token);
             } catch (error) {
               reject(error);
