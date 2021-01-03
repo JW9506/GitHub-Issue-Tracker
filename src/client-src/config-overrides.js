@@ -1,4 +1,5 @@
-const { override, disableEsLint } = require('customize-cra')
+const { override, addWebpackResolve } = require('customize-cra')
+const path = require('path')
 
 module.exports = {
   webpack: (config, env) => {
@@ -8,6 +9,12 @@ module.exports = {
         name
       )
     })
-    return override(disableEsLint())(config, env)
+    return override(
+      addWebpackResolve({
+        alias: {
+          '@': path.resolve(__dirname, './src'),
+        },
+      })
+    )(config, env)
   },
 }

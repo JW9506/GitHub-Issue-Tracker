@@ -1,4 +1,5 @@
 {
+  "extends": "./tsconfig.crafix.json",
   "compilerOptions": {
     "strict": true,
     "target": "es6",
