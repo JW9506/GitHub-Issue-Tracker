@@ -69,6 +69,7 @@ function handleIPC() {
             }
           })();
         })
+        .on('error', () => {})
         .listen(PORT);
     });
   });
