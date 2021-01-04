@@ -73,6 +73,9 @@ function handleIPC() {
         .listen(PORT);
     });
   });
+  ipcMain.handle('openLink', async (e, link: string) => {
+    open(link);
+  })
 }
 
 app.on('ready', () => {
