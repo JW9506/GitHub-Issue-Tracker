@@ -1,15 +1,20 @@
 import styled from '@emotion/styled';
 
-declare namespace HeaderButton {
+declare namespace ShortcutButton {
   type Props = {
     shortKey: string;
     tag: string;
     dark?: boolean;
-  };
-  type T = typeof HeaderButton;
+  } & React.DetailedHTMLProps<
+    React.ButtonHTMLAttributes<HTMLButtonElement>,
+    HTMLButtonElement
+  >;
+  type T = typeof ShortcutButton;
 }
 
-const HeaderButtonContatiner = styled.button<Pick<HeaderButton.Props, 'dark'>>`
+const ShortcutButtonContatiner = styled.button<
+  Pick<ShortcutButton.Props, 'dark'>
+>`
   padding: 0.25rem 0.5rem;
   height: 100%;
   outline: none;
@@ -18,18 +23,19 @@ const HeaderButtonContatiner = styled.button<Pick<HeaderButton.Props, 'dark'>>`
   color: ${({ dark }) => (dark ? '#dddddd' : '#343434')};
 `;
 
-const HeaderButton: React.FC<HeaderButton.Props> = ({
+const ShortcutButton: React.FC<ShortcutButton.Props> = ({
   shortKey,
   tag,
   dark,
+  onClick,
 }) => {
   return (
-    <HeaderButtonContatiner dark={dark}>
+    <ShortcutButtonContatiner dark={dark} onClick={onClick}>
       <span>{shortKey}</span>
       <span>: </span>
       <span>{tag}</span>
-    </HeaderButtonContatiner>
+    </ShortcutButtonContatiner>
   );
 };
 
-export default HeaderButton;
+export default ShortcutButton;

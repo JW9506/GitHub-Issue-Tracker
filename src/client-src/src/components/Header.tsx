@@ -1,6 +1,8 @@
 import styled from '@emotion/styled';
-import React from 'react';
-import HeaderButton from './HeaderButton';
+import React, { memo } from 'react';
+import ShortutButton from './ShortcutButton';
+import { KeyToLink, Shortcuts } from '#/config';
+import { useHistory } from 'react-router-dom';
 
 const HeaderContainer = styled.div`
   height: 2rem;
@@ -13,33 +15,23 @@ declare namespace Header {
   type T = typeof Header;
 }
 
-const ShortCuts = [
-  {
-    tag: 'Quit',
-    shortKey: 'q',
-  },
-  {
-    tag: 'Issues',
-    shortKey: 'i',
-  },
-  {
-    tag: 'Repositories',
-    shortKey: 'r',
-  },
-  {
-    tag: 'Pull Requests',
-    shortKey: 'p',
-  },
-];
-
-const Header: React.FC<Header.Props> = () => {
+const Header: React.FC<Header.Props> = memo(() => {
+  const history = useHistory();
   return (
     <HeaderContainer>
-      {ShortCuts.map((item, idx) => (
-        <HeaderButton tag={item.tag} shortKey={item.shortKey} key={idx} dark />
+      {Shortcuts.map((item, idx) => (
+        <ShortutButton
+          tag={item.tag}
+          shortKey={item.shortKey}
+          key={idx}
+          dark
+          onClick={() => {
+            history.push(KeyToLink[item.shortKey].link);
+          }}
+        />
       ))}
     </HeaderContainer>
   );
-};
+});
 
 export default Header;

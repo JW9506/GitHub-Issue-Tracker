@@ -3,3 +3,4 @@ export { Left } from './Left';
 export { Right } from './Right';
 export { Body } from './Body';
 export { MessageBox } from './MessageBox';
+export { Text } from './Text';
