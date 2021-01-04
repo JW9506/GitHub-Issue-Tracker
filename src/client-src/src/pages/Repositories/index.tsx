@@ -1,12 +1,6 @@
-import { useSelector, useStore, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import React, { useEffect } from 'react';
-import {
-  Switch,
-  Route,
-  useRouteMatch,
-  useHistory,
-  Link,
-} from 'react-router-dom';
+import { Switch, Route, useRouteMatch } from 'react-router-dom';
 import * as focus from '#/store/focus';
 import RepositoriesMain from './RepositoriesMain';
 
@@ -16,23 +10,9 @@ declare namespace Repositories {
 }
 
 const NewRepo = () => {
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(focus.add('repositoryFocus'));
-    return () => {
-      dispatch(focus.remove('repositoryFocus'));
-    };
-  }, []);
   return <> New Repositories</>;
 };
 const ListRepo = () => {
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(focus.add('repositoryFocus'));
-    return () => {
-      dispatch(focus.remove('repositoryFocus'));
-    };
-  }, []);
   return <> List Repositories</>;
 };
 
