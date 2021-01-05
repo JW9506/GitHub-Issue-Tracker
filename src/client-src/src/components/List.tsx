@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import styled from '@emotion/styled';
-import { css, CSSInterpolation, cx } from '@emotion/css';
+import { css, cx } from '@emotion/css';
 import { Text } from '#/containers/';
 
 declare namespace List {
@@ -42,22 +42,22 @@ const Item: React.FC<{
   className?: string;
   active?: boolean;
 }> = ({ children, onClick, className, active }) => {
-  const styles: CSSInterpolation = {
-    height: '3.5rem',
-    cursor: 'pointer',
-    lineHeight: '3.5rem',
-    fontFamily: 'cursive',
-    paddingLeft: '1rem',
-  };
-  const activeStyles: CSSInterpolation = {
-    backgroundColor: 'blue',
-  };
+  const styles = css`
+    height: 3.5rem;
+    cursor: pointer;
+    line-height: 3.5rem;
+    font-family: cursive;
+    padding-left: 1rem;
+  `;
+  const activeStyles = css`
+    background-color: #1f4188;
+  `;
   const ref = useRef<HTMLLIElement>(null);
   return (
     <li
       ref={ref}
       onClick={() => onClick?.(ref)}
-      className={cx(css(styles), className, active && css(activeStyles))}
+      className={cx(styles, className, active && activeStyles)}
     >
       {children}
     </li>
@@ -110,11 +110,11 @@ const List: React.FC<List.Props> = ({ items, dark, onClick, onEnter }) => {
     };
   }, [currActive]);
 
-  const styles = css({
-    backgroundColor: dark ? '#373737' : '#ddd',
-    color: dark ? '#ddd' : '#373737',
-    borderBottom: `1px solid ${dark ? '#ddd' : '#373737'}`,
-  });
+  const styles = css`
+    background-color: ${dark ? '#373737' : '#ddd'};
+    color: ${dark ? '#ddd' : '#373737'};
+    border-bottom: ${`1px solid ${dark ? '#ddd' : '#373737'}`};
+  `;
   return (
     <>
       <Text center>List Repositories</Text>

@@ -1,18 +1,19 @@
 import React from 'react';
 import { CSSInterpolation, css } from '@emotion/css';
-import { Link, useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 declare namespace Button {
   type Props = {
     to?: string;
-    onClick?: (e: React.MouseEvent) => void;
-  };
+  } & React.DetailedHTMLProps<
+    React.ButtonHTMLAttributes<HTMLButtonElement>,
+    HTMLButtonElement
+  >;
   type T = typeof Button;
 }
 
-const Button: React.FC<Button.Props> = ({ to, children, onClick }) => {
+const Button: React.FC<Button.Props> = ({ to, children, onClick, ...rest }) => {
   const isHref = !!to;
-  const history = useHistory();
   const BaseStyle: CSSInterpolation = {
     padding: '0.25rem 0.5rem',
   };
@@ -28,6 +29,7 @@ const Button: React.FC<Button.Props> = ({ to, children, onClick }) => {
         </Link>
       ) : (
         <button
+          {...rest}
           className={css({ ...BaseStyle, ...ButtonStyle })}
           onClick={onClick}
         >

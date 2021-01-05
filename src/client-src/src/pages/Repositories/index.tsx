@@ -7,6 +7,7 @@ import * as focus from '#/store/focus';
 import RepositoriesMain from './RepositoriesMain';
 import NewRepositories from './NewRepositories';
 import ListRepositories from './ListRepositories';
+import { MessageBox } from '#/containers';
 
 declare namespace Repositories {
   type Props = {};
@@ -38,11 +39,13 @@ const Repositories: React.FC<Repositories.Props> = () => {
         <ShortcutButton shortKey="l" tag="List Repositories" dark />
         <ShortcutButton shortKey="c" tag="Create New Repositories" dark />
       </KeyListContainer>
-      <Switch>
-        <Route exact path={match.path} component={RepositoriesMain} />
-        <Route path={`${match.path}/new`} component={NewRepositories} />
-        <Route path={`${match.path}/list`} component={ListRepositories} />
-      </Switch>
+      <MessageBox>
+        <Switch>
+          <Route exact path={match.path} component={RepositoriesMain} />
+          <Route path={`${match.path}/new`} component={NewRepositories} />
+          <Route path={`${match.path}/list`} component={ListRepositories} />
+        </Switch>
+      </MessageBox>
     </Container>
   );
 };
