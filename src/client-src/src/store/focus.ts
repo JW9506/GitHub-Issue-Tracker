@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-export type FocusType = 'repositoryFocus';
+export type FocusType = 'repositoryFocus' | 'issueFocus';
 
 const initialState = {
   current: {} as Record<string, boolean>,

@@ -26,13 +26,16 @@ function App() {
       if (!KeyToLink[e.key]) {
         return;
       }
-      if (
-        !KeyToLink[e.key]['when'] ||
-        KeyToLink[e.key]['when']!.some((item) =>
-          Object.keys(current).includes(item)
-        )
-      ) {
-        history.push(KeyToLink[e.key].link);
+      const match = KeyToLink[e.key].findIndex((obj) => {
+        return (
+          !obj.when ||
+          obj.when.some((obj2) => {
+            return Object.keys(current).includes(obj2);
+          })
+        );
+      });
+      if (match !== -1) {
+        history.push(KeyToLink[e.key][match].link);
       }
     };
     document.addEventListener('keydown', handleNavKey);

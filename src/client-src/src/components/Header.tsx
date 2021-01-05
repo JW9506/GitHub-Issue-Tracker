@@ -3,7 +3,6 @@ import React, { memo } from 'react';
 import ShortutButton from './ShortcutButton';
 import { KeyToLink, Shortcuts } from '#/config';
 import { useHistory } from 'react-router-dom';
-import { useSelector } from 'react-redux';
 
 const HeaderContainer = styled.div`
   height: 2rem;
@@ -17,7 +16,6 @@ declare namespace Header {
 }
 
 const Header: React.FC<Header.Props> = memo(() => {
-  const state = useSelector((st) => st)
   const history = useHistory();
   return (
     <HeaderContainer>
@@ -28,11 +26,10 @@ const Header: React.FC<Header.Props> = memo(() => {
           key={idx}
           dark
           onClick={() => {
-            history.push(KeyToLink[item.shortKey].link);
+            history.push(KeyToLink[item.shortKey][0].link);
           }}
         />
       ))}
-      <div>{JSON.stringify(state)}</div>
     </HeaderContainer>
   );
 });

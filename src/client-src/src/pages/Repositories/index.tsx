@@ -8,6 +8,7 @@ import RepositoriesMain from './RepositoriesMain';
 import NewRepositories from './NewRepositories';
 import ListRepositories from './ListRepositories';
 import { MessageBox } from '#/containers';
+import { RepositoriesShortcut } from '#/config';
 
 declare namespace Repositories {
   type Props = {};
@@ -36,8 +37,14 @@ const Repositories: React.FC<Repositories.Props> = () => {
   return (
     <Container>
       <KeyListContainer>
-        <ShortcutButton shortKey="l" tag="List Repositories" dark />
-        <ShortcutButton shortKey="c" tag="Create New Repositories" dark />
+        {RepositoriesShortcut.map((item) => (
+          <ShortcutButton
+            key={item.shortKey}
+            shortKey={item.shortKey}
+            tag={item.tag}
+            dark
+          />
+        ))}
       </KeyListContainer>
       <MessageBox>
         <Switch>

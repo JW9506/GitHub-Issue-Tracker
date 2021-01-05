@@ -14,7 +14,7 @@ declare namespace Form {
 const FormContainer = styled.form`
   display: flex;
   flex-direction: column;
-  height: 100%;
+  height: 80%;
   justify-content: center;
   align-items: center;
 `;
@@ -40,7 +40,6 @@ const Form: React.FC<Form.Props> = ({
 
   return (
     <FormContainer onSubmit={handleSubmit}>
-      <Text center>New Repository</Text>
       {Object.keys(fieldItem).map((item) => {
         return (
           <Field

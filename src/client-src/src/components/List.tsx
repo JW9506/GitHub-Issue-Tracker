@@ -66,7 +66,7 @@ const Item: React.FC<{
 
 const List: React.FC<List.Props> = ({ items, dark, onClick, onEnter }) => {
   const ref = useRef<HTMLUListElement>(null);
-  const size = items?.length ?? 0;
+  const size = items?.length ?? 1;
   const windowHeight = ref.current?.offsetHeight ?? 0;
   const [currActive, setCurrActive] = useState(0);
   useEffect(() => {
@@ -108,7 +108,7 @@ const List: React.FC<List.Props> = ({ items, dark, onClick, onEnter }) => {
     return () => {
       document.removeEventListener('keydown', handleListKey);
     };
-  }, [currActive]);
+  }, [currActive, size]);
 
   const styles = css`
     background-color: ${dark ? '#373737' : '#ddd'};
@@ -116,21 +116,18 @@ const List: React.FC<List.Props> = ({ items, dark, onClick, onEnter }) => {
     border-bottom: ${`1px solid ${dark ? '#ddd' : '#373737'}`};
   `;
   return (
-    <>
-      <Text center>List Repositories</Text>
-      <Container ref={ref}>
-        {items?.map((item, idx) => (
-          <Item
-            active={idx === currActive}
-            className={styles}
-            key={Math.random()}
-            onClick={onClick}
-          >
-            {item}
-          </Item>
-        ))}
-      </Container>
-    </>
+    <Container ref={ref}>
+      {items?.map((item, idx) => (
+        <Item
+          active={idx === currActive}
+          className={styles}
+          key={Math.random()}
+          onClick={onClick}
+        >
+          {item}
+        </Item>
+      ))}
+    </Container>
   );
 };
 

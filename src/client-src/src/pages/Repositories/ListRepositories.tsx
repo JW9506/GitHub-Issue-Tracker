@@ -1,5 +1,6 @@
 import React from 'react';
 import List from '#/components/List';
+import { Text } from '#/containers';
 import { ipcRenderer } from 'electron';
 import { gql } from 'apollo-boost';
 import { listRepositories } from './types/listRepositories';
@@ -37,19 +38,23 @@ const ListRepositories: React.FC<ListRepositories.Props> = () => {
   }
   const repos = data?.viewer?.repositories?.nodes;
   return (
-    <List
-      items={repos?.map((item) => item?.name)}
-      onClick={(el) => {
-        const link = repos?.find((repo) => repo?.name === el.current?.innerText)
-          ?.url;
-        link && ipcRenderer.invoke('openLink', link);
-      }}
-      onEnter={(idx) => {
-        const link = repos?.[idx]?.url;
-        link && ipcRenderer.invoke('openLink', link);
-      }}
-      dark
-    />
+    <>
+      <Text center>Repository List</Text>
+      <List
+        items={repos?.map((item) => item?.name)}
+        onClick={(el) => {
+          const link = repos?.find(
+            (repo) => repo?.name === el.current?.innerText
+          )?.url;
+          link && ipcRenderer.invoke('openLink', link);
+        }}
+        onEnter={(idx) => {
+          const link = repos?.[idx]?.url;
+          link && ipcRenderer.invoke('openLink', link);
+        }}
+        dark
+      />
+    </>
   );
 };
 

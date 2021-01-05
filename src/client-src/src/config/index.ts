@@ -35,7 +35,7 @@ export const Shortcuts: ShortcutType[] = [
   },
 ];
 
-const RepositoriesShortcut: ShortcutType[] = [
+export const RepositoriesShortcut: ShortcutType[] = [
   {
     tag: 'List Repositories',
     shortKey: 'l',
@@ -50,10 +50,28 @@ const RepositoriesShortcut: ShortcutType[] = [
   },
 ];
 
-export const KeyToLink = Shortcuts.concat(RepositoriesShortcut).reduce(
-  (prev, curr) => {
-    prev[curr.shortKey] = curr;
-    return prev;
+export const IssuesShortcut: ShortcutType[] = [
+  {
+    tag: 'List Issues',
+    shortKey: 'l',
+    when: ['issueFocus'],
+    link: '/issues/list',
   },
-  {} as Record<string, ShortcutType>
-);
+  {
+    tag: 'Create New Issue',
+    shortKey: 'c',
+    when: ['issueFocus'],
+    link: '/issues/new',
+  },
+];
+
+export const KeyToLink = Shortcuts.concat(RepositoriesShortcut)
+  .concat(IssuesShortcut)
+  .reduce((prev, curr) => {
+    if (prev[curr.shortKey] == null) {
+      prev[curr.shortKey] = [curr];
+    } else {
+      prev[curr.shortKey].push(curr);
+    }
+    return prev;
+  }, {} as Record<string, ShortcutType[]>);

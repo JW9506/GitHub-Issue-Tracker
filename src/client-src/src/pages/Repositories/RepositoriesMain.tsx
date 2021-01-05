@@ -1,4 +1,4 @@
-import Button from '#/components/Button';
+import { Text } from '#/containers';
 import React from 'react';
 
 declare namespace RepositoriesMain {
@@ -9,9 +9,8 @@ declare namespace RepositoriesMain {
 const RepositoriesMain: React.FC<RepositoriesMain.Props> = () => {
   return (
     <>
-      <Button to="/">foo</Button>
-      <Button>bar</Button>
-      RepositoriesMain
+      <Text center>RepositoriesMain</Text>
+      <Text center>Welcome</Text>
     </>
   );
 };

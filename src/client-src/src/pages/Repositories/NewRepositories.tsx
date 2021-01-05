@@ -1,5 +1,5 @@
 import { Form } from '#/components';
-import { MessageBox } from '#/containers';
+import { Text } from '#/containers';
 import { gql } from 'apollo-boost';
 import React, { useState } from 'react';
 import {
@@ -10,7 +10,6 @@ import {
 
 import { RepositoryVisibility } from '#/types/graphql-global-types';
 import { useMutation } from 'react-apollo-hooks';
-import NewRepositoriesSuccess from './NewRepositoriesSuccess';
 
 const CREATE_REPOSITORY = gql`
   mutation createNewRepository(
@@ -37,7 +36,7 @@ declare namespace NewRepositories {
 
 const NewRepositories: React.FC<NewRepositories.Props> = () => {
   const [
-    repository,
+    ,
     setRepository,
   ] = useState<createNewRepository_createRepository_repository | null>();
 
@@ -72,7 +71,12 @@ const NewRepositories: React.FC<NewRepositories.Props> = () => {
   // return <NewRepositoriesSuccess repository={repository} />;
   // }
 
-  return <Form initialFieldItem={fieldItem} onSubmit={handleSubmit} />;
+  return (
+    <>
+      <Text center>New Repository</Text>
+      <Form initialFieldItem={fieldItem} onSubmit={handleSubmit} />
+    </>
+  );
 };
 
 export default NewRepositories;

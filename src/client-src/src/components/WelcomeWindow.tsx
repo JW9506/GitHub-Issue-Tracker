@@ -1,5 +1,6 @@
 import React from 'react';
 import { gql } from 'apollo-boost';
+import { Text } from '#/containers';
 import { useQuery } from 'react-apollo-hooks';
 import { getUserInfo } from './types/getUserInfo';
 
@@ -26,7 +27,12 @@ const WelcomeWindow: React.FC<WelcomeWindow.Props> = () => {
   if (loading) {
     return <>'Loading...'</>;
   }
-  return <>{JSON.stringify(data)}</>;
+  return (
+    <>
+      <Text center>Name: {data?.viewer?.name}</Text>
+      <Text center>Bio: {data?.viewer?.bio}</Text>
+    </>
+  );
 };
 
 export default WelcomeWindow;
