@@ -6,7 +6,8 @@ import open from 'open';
 import url from 'url';
 import AppWindow from './AppWindow';
 
-const REACT_APP_GH_SECRET = '2b9e5fdc590120641c76c72d0896fff9a3649b2f';
+const REACT_APP_GH_SECRET =
+  process.env.REACT_APP_GH_SECRET || process.env.GH_SECRET;
 const REACT_APP_GH_CLIENT_ID = 'Iv1.59374653a1b5fa29';
 
 app.allowRendererProcessReuse = false;
@@ -14,6 +15,12 @@ app.allowRendererProcessReuse = false;
 let mainWindow: AppWindow | null;
 
 function handleIPC() {
+  if (REACT_APP_GH_SECRET == null) {
+    console.log(
+      'Please define REACT_APP_GH_SECRET or GH_SECRET in environment variable'
+    );
+    process.exit(1);
+  }
   ipcMain.handle('getCode', async () => {
     const PORT = 3122;
 
@@ -37,7 +44,6 @@ function handleIPC() {
             </html>
           `);
           res.end();
-
           (async () => {
             if (!code) return;
             const body = {
@@ -75,11 +81,12 @@ function handleIPC() {
   });
   ipcMain.handle('openLink', async (e, link: string) => {
     open(link);
-  })
+  });
 }
 
 app.on('ready', () => {
   handleIPC();
+  console.log(process.env['GH_SECRET']);
   mainWindow = new AppWindow(
     {
       width: 1440,
